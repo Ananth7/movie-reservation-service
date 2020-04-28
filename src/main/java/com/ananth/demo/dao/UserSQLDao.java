@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class UserSQLDao implements UserDao {
+
     @Override
     public boolean insertUser(UUID uuid, User user) {
         return false;

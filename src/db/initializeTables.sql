@@ -42,10 +42,12 @@ CREATE TABLE movies (
 `id` bigint(19) NOT NULL AUTO_INCREMENT,
 `uuid` varchar(40) NOT NULL,
 `name` varchar(250) NOT NULL,
-`plot` varchar(250) NOT NULL ,
-`poster_urls` varchar(250) NULL ,
-`trailer_url` varchar(250) NULL ,
+`duration` bigint(19) NOT NULL,
 `genre` varchar(250) NULL ,
+`rating` varchar(10) NOT NULL,
+`poster_url` varchar(250) NULL ,
+`trailer_url` varchar(250) NULL ,
+`plot` varchar(2500) NOT NULL ,
  PRIMARY KEY (`id`),
  UNIQUE KEY `uk_movies_name`(`name`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

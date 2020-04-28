@@ -12,15 +12,15 @@ import java.util.List;
 public class MovieService {
     private MoviesDao movieDao;
 
-    public void addMovie(Movie movie) {
-        movieDao.addMovie(movie);
+    public Movie addMovie(Movie movie) {
+        return movieDao.addMovie(movie);
     }
 
     public List<Movie> getMovies() {
         return movieDao.getMovies();
     }
 
-    public void deleteMovie(Movie movie) {
-        movieDao.deleteMovie(movie);
+    public List<Movie> getMoviesByCity(String name) {
+        return movieDao.getMoviesByCity(name);
     }
 }

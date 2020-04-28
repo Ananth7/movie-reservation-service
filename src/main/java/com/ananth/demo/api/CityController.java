@@ -3,9 +3,13 @@ package com.ananth.demo.api;
 import com.ananth.demo.model.City;
 import com.ananth.demo.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,12 +26,17 @@ public class CityController {
     }
 
     @GetMapping
+    @ResponseBody
     public List<City> getCities() {
-        return cityService.getCities();
+        List<City> res = cityService.getCities();
+        res.forEach(r -> System.out.println(r));
+        return res;
     }
 
+    @ResponseBody
     @PostMapping
-    public void addCity(City city) {
-        cityService.addCity(city);
+    public City addCity(@RequestBody City city) {
+        System.out.println("Controller = " + city.getCityId() + " " + city.getName());
+        return cityService.addCity(city);
     }
 }

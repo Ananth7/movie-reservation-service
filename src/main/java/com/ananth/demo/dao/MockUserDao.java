@@ -23,4 +23,10 @@ public class MockUserDao implements UserDao {
     public List<User> getAllUsers() {
         return DB;
     }
+
+    @Override
+    public Optional<User> getUserById(UUID uuid) {
+        return DB.stream().filter(user -> user.getUserID().equals(uuid)).findFirst();
+    }
+
 }

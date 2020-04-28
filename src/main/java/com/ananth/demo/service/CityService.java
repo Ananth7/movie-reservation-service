@@ -14,8 +14,9 @@ public class CityService {
         this.cityDao = cityDao;
     }
 
-    public void addCity(City city) {
-        cityDao.addCity(city);
+    public City addCity(City city) {
+        System.out.println(city.getName() + " " + city.getCityId());
+        return cityDao.addCity(city);
     }
 
     public List<City> getCities() {

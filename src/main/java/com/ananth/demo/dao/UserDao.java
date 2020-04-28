@@ -3,6 +3,7 @@ package com.ananth.demo.dao;
 import com.ananth.demo.model.User;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface UserDao {
@@ -15,5 +16,7 @@ public interface UserDao {
     }
 
     List<User> getAllUsers();
+
+    Optional<User> getUserById(UUID uuid);
 
 }

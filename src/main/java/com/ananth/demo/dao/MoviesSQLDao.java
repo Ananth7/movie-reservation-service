@@ -26,7 +26,8 @@ public class MoviesSQLDao implements MoviesDao {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }    }
+        }
+    }
 
 
     @Override

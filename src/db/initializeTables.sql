@@ -36,7 +36,6 @@ CREATE TABLE cinemas (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-
 CREATE TABLE movies (
 `id` bigint(19) NOT NULL AUTO_INCREMENT,
 `uuid` varchar(40) NOT NULL,
@@ -56,8 +55,8 @@ CREATE TABLE shows (
 `uuid` varchar(40) NOT NULL,
 `movie_id` bigint(19) NOT NULL,
 `cinema_id` bigint(19) NOT NULL,
-`start_time` timestamp NULL DEFAULT NULL,
-`end_time` timestamp NULL DEFAULT NULL,
+`start_time_epoch` varchar(40) NOT NULL,
+`end_time_epoch`  varchar(40) NOT NULL,
  PRIMARY KEY (`id`),
  UNIQUE KEY `uk_shows_cinema_id_movie_id`(`cinema_id`,`movie_id`),
  CONSTRAINT `fk_shows_cinema_id` FOREIGN KEY (`cinema_id`) REFERENCES `cinemas` (`id`) ON DELETE CASCADE,

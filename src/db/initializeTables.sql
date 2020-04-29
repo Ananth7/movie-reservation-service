@@ -29,13 +29,12 @@ CREATE TABLE cinemas (
 `uuid` varchar(40) NOT NULL,
 `name` varchar(250) NOT NULL,
 `city_id` bigint(19) NOT NULL,
-`location` varchar(70) NOT NULL ,
-`description` varchar(70) NULL ,
 `seats` text NOT NULL,
  PRIMARY KEY (`id`),
  UNIQUE KEY `uk_cinemas_name_city_id`(`name`,`city_id`),
  CONSTRAINT `fk_cinemas_city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 
 CREATE TABLE movies (

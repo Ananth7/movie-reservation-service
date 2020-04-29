@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,22 +23,19 @@ public class CinemaController {
     @Autowired
     private CinemaService cinemaService;
 
-    @Autowired
-    private UserService userService;
-
-    @PostMapping("/api/{cinemaOwnerId}/cinema")
-    public boolean createCinema(@RequestBody Cinema cinema, @PathVariable("cinemaOwnerId") UUID id) {
-        Optional<User> cinemaOwner = userService.getUserById(id);
-        cinemaOwner.ifPresent(cinema::setOwner);
+    @PostMapping("/api/v1/cinema")
+    @ResponseBody
+    public Cinema createCinema(@RequestBody Cinema cinema) {
         return cinemaService.addCinema(cinema);
     }
 
-    @GetMapping("/api/cinema/{cinemaId}")
+    @GetMapping("/api/v1/cinema/{cinemaId}")
     public Optional<Cinema> findCinemaById(@PathVariable("cinemaId") UUID id) {
         return cinemaService.findCinemaById(id);
     }
 
-    @GetMapping("/api/cinema")
+    @GetMapping("/api/v1/cinema")
+    @ResponseBody
     public List<Cinema> getAllCinemas() {
         return (List<Cinema>) cinemaService.getAllCinemas();
     }

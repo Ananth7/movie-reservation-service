@@ -21,7 +21,7 @@ public class CinemaService {
         this.cinemaDao = cinemaDao;
     }
 
-    public boolean addCinema(Cinema cinema) {
+    public Cinema addCinema(Cinema cinema) {
         return cinemaDao.addCinema(cinema);
     }
 

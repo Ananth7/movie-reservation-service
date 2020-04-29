@@ -3,19 +3,18 @@ package com.ananth.demo.service;
 import com.ananth.demo.dao.UserDao;
 import com.ananth.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserService {
+
+    @Autowired
     private final UserDao userDao;
 
     @Autowired
-    public UserService(@Qualifier("MockUserDao") UserDao userDao) {
+    public UserService(UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -28,7 +27,4 @@ public class UserService {
         return userDao.getAllUsers();
     }
 
-    public Optional<User> getUserById(UUID uuid) {
-        return userDao.getUserById(uuid);
-    }
 }

@@ -55,18 +55,4 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping(path = "{id}/roles")
-    public void addUserRole(@PathVariable("id") UUID userId,
-                            @RequestBody RolesRequestBody body) {
-       rolesService.insertRole(new UserRole(userId,
-               Roles.getIdByName(body.getRole()),
-               body.getTheaterId()
-               ));
-    }
-
-    @GetMapping(path = "/roles")
-    public List<UserRole> getAllRoles() {
-        return rolesService.getAllRoles();
-    }
-
 }

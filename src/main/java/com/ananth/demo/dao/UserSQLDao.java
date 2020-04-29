@@ -1,30 +1,57 @@
 package com.ananth.demo.dao;
 
+import com.ananth.demo.QueryExecutor;
+import com.ananth.demo.model.Seat;
 import com.ananth.demo.model.User;
+import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
+@Repository
 public class UserSQLDao implements UserDao {
 
     @Override
-    public boolean insertUser(UUID uuid, User user) {
-        return false;
-    }
-
-    @Override
-    public boolean insertUser(User user) {
-        return false;
+    public User insertUser(User user) {
+        String addShowQuery = "insert into users (uuid, name, email, phone_number, is_admin "+
+                ") values (' " + user.getUserID() + "', '" + user.getName() + "', '"
+                + user.getEmailId() + "', '" + user.getPhoneNumber() + "','" + user.getIsAdmin() +  "');";
+        System.out.println(addShowQuery);
+        try {
+            QueryExecutor.execWrites(addShowQuery);
+            return  user;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public List<User> getAllUsers() {
-        return null;
-    }
+        String getCitiesQuery = "select * from users;";
+        try {
+            ResultSet resultSet = QueryExecutor.execReads(getCitiesQuery);
+            List<User> res = new ArrayList<>();
 
-    @Override
-    public Optional<User> getUserById(UUID uuid) {
-        return Optional.empty();
+            while (resultSet.next()) {
+                // retrieve and print the values for the current row
+                User user = User.builder()
+                        .userID(resultSet.getString("uuid"))
+                        .name(resultSet.getString("name"))
+                        .emailId(resultSet.getString("email"))
+                        .phoneNumber(resultSet.getString("phone_number"))
+                        .isAdmin(resultSet.getInt("is_admin")).build();
+
+                System.out.println(user);
+                res.add(user);
+            }
+            resultSet.getStatement().getConnection().close();
+            return res;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

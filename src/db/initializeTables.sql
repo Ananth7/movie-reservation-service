@@ -68,6 +68,7 @@ CREATE TABLE booked_seats (
     `id` bigint(19) NOT NULL AUTO_INCREMENT,
     `uuid` varchar(40) NOT NULL,
     `show_id` bigint(19) NOT NULL,
+    `seat_number` varchar(40) NOT NULL,
     `status` varchar(250) NULL,
  PRIMARY KEY (`id`),
  CONSTRAINT `fk_booked_seats_show_id` FOREIGN KEY (`show_id`) REFERENCES `shows` (`id`) ON DELETE CASCADE

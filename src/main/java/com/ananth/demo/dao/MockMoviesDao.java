@@ -32,4 +32,9 @@ public class MockMoviesDao implements MoviesDao {
     public List<Movie> getMoviesByCity(String name) {
         return null;
     }
+
+    @Override
+    public Movie getMovieById(String movieId) {
+        return null;
+    }
 }

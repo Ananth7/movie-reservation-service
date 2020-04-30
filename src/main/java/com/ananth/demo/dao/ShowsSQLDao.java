@@ -22,8 +22,8 @@ public class ShowsSQLDao implements ShowsDao {
                 // retrieve and print the values for the current row
                 Show show = Show.builder()
                         .showId(resultSet.getString("uuid"))
-                        .movieId(resultSet.getInt("movie_id"))
-                        .cinemaId(resultSet.getInt("cinema_id"))
+                        .movieId(resultSet.getString("movie_id"))
+                        .cinemaId(resultSet.getString("cinema_id"))
                         .startTime(resultSet.getString("start_time_epoch"))
                         .endTime(resultSet.getString("end_time_epoch")).build();
 
@@ -62,5 +62,10 @@ public class ShowsSQLDao implements ShowsDao {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public List<Show> getShows(String cinemaId, String showId) {
+        return null;
     }
 }

@@ -37,6 +37,12 @@ public class MoviesController {
         return movieService.getMovies();
     }
 
+    @GetMapping
+    @ResponseBody
+    public Movie getMovieById(@PathVariable("movie") String movieId) {
+        return movieService.getMovieById(movieId);
+    }
+
     @PostMapping
     @ResponseBody
     public Movie addMovie(@RequestBody Movie movie) {

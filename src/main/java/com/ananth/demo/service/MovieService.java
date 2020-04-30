@@ -16,6 +16,10 @@ public class MovieService {
         return movieDao.addMovie(movie);
     }
 
+    public Movie getMovieById(String movieId) {
+        return movieDao.getMovieById(movieId);
+    }
+
     public List<Movie> getMovies() {
         return movieDao.getMovies();
     }

@@ -27,8 +27,8 @@ public class CinemaService {
 
     public Iterable<Cinema> getAllCinemas() {return cinemaDao.getAllCinemas();}
 
-    public Optional<Cinema> findCinemaById(UUID cinema) {
-        return cinemaDao.findCinemaById(cinema);
+    public Optional<Cinema> findCinemaById(String cinemaId) {
+        return cinemaDao.findCinemaById(cinemaId);
     }
 
 

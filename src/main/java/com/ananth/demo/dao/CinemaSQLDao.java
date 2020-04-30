@@ -29,7 +29,7 @@ public class CinemaSQLDao implements CinemaDao {
     }
 
     @Override
-    public Optional<Cinema> findCinemaById(UUID cinemaId) {
+    public Optional<Cinema> findCinemaById(String cinemaId) {
         return Optional.empty();
     }
 

@@ -92,4 +92,9 @@ public class MoviesSQLDao implements MoviesDao {
             return null;
         }
     }
+
+    @Override
+    public Movie getMovieById(String movieId) {
+        return null;
+    }
 }

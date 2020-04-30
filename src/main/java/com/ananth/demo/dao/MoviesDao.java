@@ -8,4 +8,5 @@ public interface MoviesDao {
     List<Movie> getMovies();
     Movie addMovie(Movie movie);
     List<Movie> getMoviesByCity(String name);
+    Movie getMovieById(String movieId);
 }

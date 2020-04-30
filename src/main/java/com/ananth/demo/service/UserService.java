@@ -18,9 +18,17 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public boolean addUser(User user) {
-        userDao.insertUser(user);
-        return true;
+    public User addUser(User user) {
+        return userDao.insertUser(user);
+    }
+
+    public User getUserById(String id) {
+//        return userDao.getUserById();
+        return null;
+    }
+
+    public void deleteUserById(String id) {
+
     }
 
     public List<User> getAllUsers() {

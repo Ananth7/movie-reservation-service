@@ -6,8 +6,10 @@ import com.ananth.demo.model.User;
 import com.ananth.demo.request.RolesRequestBody;
 import com.ananth.demo.service.RolesService;
 import com.ananth.demo.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,19 +37,26 @@ import java.util.UUID;
 
 @RequestMapping("api/v1/user")
 @RestController
+@AllArgsConstructor
 public class UserController {
-    private final UserService userService;
-    private final RolesService rolesService;
 
     @Autowired
-    public UserController(UserService userService, RolesService rolesService) {
-        this.userService = userService;
-        this.rolesService = rolesService;
-    }
+    private final UserService userService;
+
 
     @PostMapping
     public void addUser(@Valid @NonNull @RequestBody User user) {
         userService.addUser(user);
+    }
+
+    @GetMapping("api/v1/user/{userId}")
+    public User getUserById(@PathVariable("userId") String id) {
+        return userService.getUserById(id);
+    }
+
+    @DeleteMapping("/api/v1/user/{userId}")
+    public void deleteUser(@PathVariable("userId") String userId) {
+        userService.deleteUserById(userId);
     }
 
     @GetMapping

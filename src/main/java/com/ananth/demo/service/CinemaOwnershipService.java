@@ -21,4 +21,8 @@ public class CinemaOwnershipService {
         return cinemaOwnershipDao.addCinemaOwnershipDetail(cinemaOwnership);
     }
 
+    public CinemaOwnership removeCinemaOwnership(CinemaOwnership cinemaOwnership) {
+        return cinemaOwnershipDao.addCinemaOwnershipDetail(cinemaOwnership);
+    }
+
 }

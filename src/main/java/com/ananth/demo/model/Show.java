@@ -1,6 +1,6 @@
 package com.ananth.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ananth.demo.request.CreateShowRequestBody;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,15 +12,13 @@ import java.util.UUID;
 @Builder
 public class Show {
     private String showId;
-    private int movieId;
-    private int cinemaId;
+    private String movieId;
+    private String cinemaId;
     private String startTime;
     private String endTime;
 
-    public Show(@JsonProperty("movieId") int movieId,
-                @JsonProperty("cinemaId") int cinemaId,
-                @JsonProperty("startTime") String startTime,
-                @JsonProperty("endTime") String endTime) {
+    public Show(String cinemaId,
+                CreateShowRequestBody showRequest) {
         this.showId = UUID.randomUUID().toString();
         this.movieId = movieId;
         this.cinemaId = cinemaId;

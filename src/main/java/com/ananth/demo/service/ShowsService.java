@@ -20,4 +20,9 @@ public class ShowsService {
         return showsDao.getShows();
     }
 
+    public List<Show> getShows(String cinemaId, String showId) {
+//        return showsDao.getShows();
+        return null;
+    }
+
 }

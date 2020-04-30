@@ -8,5 +8,6 @@ public interface ShowsDao {
 
     List<Show> getShows();
     Show addShow(Show show);
+    List<Show> getShows(String cinemaId, String showId);
 
 }

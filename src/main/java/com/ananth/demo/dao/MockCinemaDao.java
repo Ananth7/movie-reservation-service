@@ -11,6 +11,11 @@ public class MockCinemaDao implements CinemaDao {
 
     private List<Cinema> cinemaDB = new ArrayList<>();
 
+    @Override
+    public Optional<Cinema> findCinemaById(String cinemaId) {
+        return Optional.empty();
+    }
+
     static {
         // fill mock data here;
     }
@@ -20,7 +25,6 @@ public class MockCinemaDao implements CinemaDao {
         return null;
     }
 
-    @Override
     public Optional<Cinema> findCinemaById(UUID cinemaId) {
         return Optional.empty();
     }

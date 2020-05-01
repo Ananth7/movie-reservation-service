@@ -23,7 +23,7 @@ public class BookedSeatsController {
 
     @GetMapping("/api/v1/seat")
     public List<Seat> getSeats() {
-        return seatsService.getSeats();
+        return seatsService.getSeatHistory();
     }
 
 }

@@ -43,7 +43,8 @@ public class CinemaOwnershipSQLDao implements CinemaOwnershipDao {
         String addCinemaQuery = "insert into cinema_ownership (cinema_id, uuid, user_id) values (' "
                 + cinemaOwnership.getCinema_id() + "', '"
                 + cinemaOwnership.getOwnershipId() + "', '"
-                + cinemaOwnership.getUser_id() + "');";
+                + cinemaOwnership.getOwner_id() + "');";
+        System.out.println("Add cinema query = " + addCinemaQuery);
         try {
             QueryExecutor.execWrites(addCinemaQuery);
             return  cinemaOwnership;

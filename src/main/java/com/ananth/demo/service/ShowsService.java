@@ -2,6 +2,7 @@ package com.ananth.demo.service;
 
 import com.ananth.demo.dao.ShowsDao;
 import com.ananth.demo.model.Show;
+import com.ananth.demo.response.ShowsByCityMovieResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,8 @@ public class ShowsService {
         return showsDao.getShows();
     }
 
-    public List<Show> getShows(String cinemaId, String showId) {
-//        return showsDao.getShows();
-        return null;
+    public List<ShowsByCityMovieResponse> getShows(String cityId, String movieId) {
+        return showsDao.getShows(cityId, movieId);
     }
 
 }

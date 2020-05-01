@@ -10,14 +10,14 @@ import java.util.UUID;
 public class CinemaOwnership {
     private String ownershipId;
     private String cinema_id;
-    private String email_id;
+    private String owner_id;
 
     public CinemaOwnership(
             String cinema_id,
-            String email_id) {
+            String owner_id) {
         this.ownershipId = UUID.randomUUID().toString();
         this.cinema_id = cinema_id;
-        this.email_id = email_id;
+        this.owner_id = owner_id;
     }
 }
 

@@ -10,4 +10,7 @@ public interface UserDao {
 
     List<User> getAllUsers();
 
+    User getUserById(String userId);
+
+    User getUserByEmail(String emailId);
 }

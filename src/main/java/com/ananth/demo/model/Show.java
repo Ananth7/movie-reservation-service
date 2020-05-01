@@ -16,14 +16,16 @@ public class Show {
     private String cinemaId;
     private String startTime;
     private String endTime;
+    private String showDate;
 
     public Show(String cinemaId,
                 CreateShowRequestBody showRequest) {
         this.showId = UUID.randomUUID().toString();
-        this.movieId = movieId;
+        this.movieId = showRequest.getMovieId();
         this.cinemaId = cinemaId;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = showRequest.getStartTime();
+        this.endTime = showRequest.getEndTime();
+        this.showDate = showRequest.getShowDate();
     }
 
     @Override

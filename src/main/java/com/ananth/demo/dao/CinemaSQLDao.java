@@ -2,6 +2,7 @@ package com.ananth.demo.dao;
 
 import com.ananth.demo.QueryExecutor;
 import com.ananth.demo.model.Cinema;
+import com.ananth.demo.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -30,7 +31,26 @@ public class CinemaSQLDao implements CinemaDao {
 
     @Override
     public Optional<Cinema> findCinemaById(String cinemaId) {
-        return Optional.empty();
+        String query = "select * from cinemas where uuid = '" + cinemaId + "';" ;
+        System.out.println("Query = " + query);
+        try {
+            ResultSet resultSet = QueryExecutor.execReads(query);
+            Optional<Cinema> result;
+            Cinema cinema = null;
+            while (resultSet.next()) {
+                // retrieve and print the values for the current row
+                cinema = new Cinema(resultSet.getString("uuid"),
+                        resultSet.getString("name"), resultSet.getString("city_id"),
+                        resultSet.getInt("seats"));
+                System.out.println(cinema.getName());
+            }
+
+            resultSet.getStatement().getConnection().close();
+            return Optional.ofNullable(cinema);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
 
     @Override
@@ -56,5 +76,10 @@ public class CinemaSQLDao implements CinemaDao {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public List<User> getAllOwners() {
+        return null;
     }
 }

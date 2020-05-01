@@ -3,7 +3,6 @@ package com.ananth.demo.api;
 import com.ananth.demo.model.Movie;
 import com.ananth.demo.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,9 +36,9 @@ public class MoviesController {
         return movieService.getMovies();
     }
 
-    @GetMapping
+    @GetMapping("/api/v1/movie/{movie_id}")
     @ResponseBody
-    public Movie getMovieById(@PathVariable("movie") String movieId) {
+    public Movie getMovieById(@PathVariable("movie_id") String movieId) {
         return movieService.getMovieById(movieId);
     }
 

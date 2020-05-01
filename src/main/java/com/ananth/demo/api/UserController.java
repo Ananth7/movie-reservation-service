@@ -1,10 +1,6 @@
 package com.ananth.demo.api;
 
-import com.ananth.demo.model.Roles;
-import com.ananth.demo.model.UserRole;
 import com.ananth.demo.model.User;
-import com.ananth.demo.request.RolesRequestBody;
-import com.ananth.demo.service.RolesService;
 import com.ananth.demo.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Adduser:

@@ -2,6 +2,7 @@ package com.ananth.demo.dao;
 
 import com.ananth.demo.QueryExecutor;
 import com.ananth.demo.model.Show;
+import com.ananth.demo.response.ShowsByCityMovieResponse;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -51,9 +52,11 @@ public class ShowsSQLDao implements ShowsDao {
     @Override
     public Show addShow(Show show) {
 //STR_TO_DATE('yourDateTimeValue','%d/%m/%Y %H:%i:%s')
-        String addShowQuery = "insert into shows (uuid, movie_id, cinema_id, start_time_epoch, end_time_epoch" +
+        String addShowQuery = "insert into shows (uuid, movie_id, cinema_id, start_time, end_time, show_date" +
                 ") values (' " + show.getCinemaId() + "', '" + show.getMovieId() + "', '"
-                + show.getCinemaId() + "', '" + show.getStartTime() + "', '" + show.getEndTime() + "');";
+                + show.getCinemaId() + "', STR_TO_DATE('" + show.getStartTime() + "', '%d/%m/%Y %H:%i:%s')," +
+                " STR_TO_DATE('" + show.getEndTime() + "', '%d/%m/%Y %H:%i:%s')," +
+                " STR_TO_DATE('" + show.getShowDate() + "', '%d/%m/%Y')" + ");";
         System.out.println(addShowQuery);
         try {
             QueryExecutor.execWrites(addShowQuery);
@@ -65,7 +68,38 @@ public class ShowsSQLDao implements ShowsDao {
     }
 
     @Override
-    public List<Show> getShows(String cinemaId, String showId) {
-        return null;
+    public List<ShowsByCityMovieResponse> getShows(String cityId, String movieId) {
+        String getShowsQuery = "select c.uuid as cinema_id, c.name as cinema_name, s.uuid as show_id," +
+                " s.show_date as show_date, s.start_time as start_time," +
+                " s.end_time as end_time from cinemas as c join shows as s on c.uuid = s.cinema_id" +
+                " where c.city_id = '" + cityId + "' " +
+                " and s.movie_id = '" + movieId +  "'; ";
+
+        System.out.println(getShowsQuery);
+        try {
+            ResultSet resultSet = QueryExecutor.execReads(getShowsQuery);
+            List<ShowsByCityMovieResponse> res = new ArrayList<>();
+
+            while (resultSet.next()) {
+                // retrieve and print the values for the current row
+                ShowsByCityMovieResponse show = ShowsByCityMovieResponse.builder()
+                        .cinemaId(resultSet.getString("cinema_id"))
+                        .cinemaName(resultSet.getString("cinema_name"))
+                        .show_id(resultSet.getString("show_id"))
+                        .show_date(resultSet.getDate("show_date"))
+                        .startTime(resultSet.getDate("start_time"))
+                        .endTime(resultSet.getDate("end_time")).build();
+
+                System.out.println(show);
+                res.add(show);
+            }
+            resultSet.getStatement().getConnection().close();
+            return res;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+
 }

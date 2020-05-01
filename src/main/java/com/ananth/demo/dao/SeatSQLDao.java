@@ -60,4 +60,14 @@ public class SeatSQLDao implements SeatsDao {
             return null;
         }
     }
+
+    @Override
+    public List<Seat> getSeats(String cinemaId, String showId) {
+        return null;
+    }
+
+    @Override
+    public List<Seat> reserve(String showId, List<String> seats) {
+        return null;
+    }
 }

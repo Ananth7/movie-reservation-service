@@ -54,4 +54,57 @@ public class UserSQLDao implements UserDao {
             return null;
         }
     }
+
+    public User getUserByEmail(String emailId) {
+        String getCitiesQuery = "select * from users where user where email = " + emailId + ";";
+        try {
+            ResultSet resultSet = QueryExecutor.execReads(getCitiesQuery);
+
+            User user = null;
+            while (resultSet.next()) {
+                // retrieve and print the values for the current row
+                user = User.builder()
+                        .userID(resultSet.getString("uuid"))
+                        .name(resultSet.getString("name"))
+                        .emailId(resultSet.getString("email"))
+                        .phoneNumber(resultSet.getString("phone_number"))
+                        .isAdmin(resultSet.getInt("is_admin")).build();
+
+                System.out.println(user);
+            }
+            resultSet.getStatement().getConnection().close();
+            return user;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public User getUserById(String userId) {
+        String getCitiesQuery = "select * from users where user where uuid = " + userId + ";";
+        try {
+            ResultSet resultSet = QueryExecutor.execReads(getCitiesQuery);
+
+            User user = null;
+            while (resultSet.next()) {
+                // retrieve and print the values for the current row
+                user = User.builder()
+                        .userID(resultSet.getString("uuid"))
+                        .name(resultSet.getString("name"))
+                        .emailId(resultSet.getString("email"))
+                        .phoneNumber(resultSet.getString("phone_number"))
+                        .isAdmin(resultSet.getInt("is_admin")).build();
+
+                System.out.println(user);
+            }
+            resultSet.getStatement().getConnection().close();
+            return user;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -12,16 +12,19 @@ import java.util.UUID;
 @Builder
 public class CreateShowRequestBody {
     private String showId;
-    private int movieId;
+    private String movieId;
     private String startTime;
     private String endTime;
+    private String showDate;
 
-    public CreateShowRequestBody(@JsonProperty("movieId") int movieId,
+    public CreateShowRequestBody(@JsonProperty("movieId") String movieId,
                 @JsonProperty("startTime") String startTime,
-                @JsonProperty("endTime") String endTime) {
+                @JsonProperty("endTime") String endTime,
+                @JsonProperty("showDate") String showDate) {
         this.showId = UUID.randomUUID().toString();
         this.movieId = movieId;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.showDate = showDate;
     }
 }

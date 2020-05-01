@@ -16,9 +16,13 @@ public class SeatsService {
         return seatsDao.addSeat(seat);
     }
 
-    public List<Seat> getSeats() {
+    public List<Seat> getSeatHistory() {
         return seatsDao.getSeats();
     }
 
+    public List<Seat> getSeats(String cinemaId, String showId) {return seatsDao.getSeats(cinemaId, showId);}
 
+    public List<Seat> reserve(String showId, List<String> seats) {
+        return seatsDao.reserve(showId, seats);
+    }
 }

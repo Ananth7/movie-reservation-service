@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -43,13 +44,18 @@ public class ShowsController {
 
     @GetMapping("/api/v1/shows/{city_id}/{movie_id}")
     @ResponseBody
-    public Map<String, List<ShowsByCityMovieResponse>> getShowsByCityAndMovie (@PathVariable("city_id") String city_id,
+    public Map<String, List<ShowsByCityMovieResponse>> getShowsByCityAndMovie(@PathVariable("city_id") String city_id,
                                                                                @PathVariable("movie_id") String movie_id) {
         List<ShowsByCityMovieResponse> shows = showsService.getShows(city_id, movie_id);
-
         return shows.stream().collect(Collectors.groupingBy(ShowsByCityMovieResponse::getCinemaName));
     }
 
+
+    @GetMapping("/api/v1/shows/{show_id}/getfreeseats")
+    @ResponseBody
+    public Optional<List<Seat>> getFreeSeats(@PathVariable("show_id") String show_id) {
+        return showsService.getFreeSeats(show_id);
+    }
 
     @PutMapping("/api/v1/shows/{show_id}/seat/reserve")
     @ResponseBody
@@ -57,6 +63,18 @@ public class ShowsController {
             @PathVariable("show_id") String showId,
             @RequestBody SeatsRequestBody seatsRequestBody) {
             return seatsService.reserve(showId, seatsRequestBody.getSeatIds());
+    }
+
+    @GetMapping("/api/v1/shows/{show_id}")
+    @ResponseBody
+    public Optional<Show> getShowById(@PathVariable("show_id") String showId) {
+        return showsService.getShowById(showId);
+    }
+
+    @GetMapping("api/v1/shows/{show_id}/bookedseats")
+    @ResponseBody
+    public List<Seat> getBookedSeatsForShow(@PathVariable("show_id") String showId) {
+        return seatsService.getBookedSeats(showId);
     }
 
 }

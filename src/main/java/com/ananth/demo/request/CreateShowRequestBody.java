@@ -1,10 +1,13 @@
 package com.ananth.demo.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -19,8 +22,8 @@ public class CreateShowRequestBody {
 
     public CreateShowRequestBody(@JsonProperty("movieId") String movieId,
                 @JsonProperty("startTime") String startTime,
-                @JsonProperty("endTime") String endTime,
-                @JsonProperty("showDate") String showDate) {
+                @JsonProperty("endTime")   String endTime,
+                @JsonProperty("showDate")  String showDate) {
         this.showId = UUID.randomUUID().toString();
         this.movieId = movieId;
         this.startTime = startTime;

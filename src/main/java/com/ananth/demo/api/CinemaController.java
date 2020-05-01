@@ -23,7 +23,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 public class CinemaController {
@@ -93,7 +92,6 @@ public class CinemaController {
     }
 
 
-
     @GetMapping("/api/v1/cinema")
     @ResponseBody
     public List<Cinema> getAllCinemas() {
@@ -110,12 +108,16 @@ public class CinemaController {
         return showsService.addShow(new Show(cinemaId, show));
     }
 
-    @GetMapping("api/v1/cinema/{cinema_id}/shows/{show_id}/sets")
+    @GetMapping("api/v1/cinema/{cinema_id}/shows/{show_id}/availableseats")
     @ResponseBody
-    public List<Seat> getSeats(
+    public List<Integer> getSeats(
             @PathVariable("cinema_id") String cinemaId,
             @PathVariable("show_id") String showId) {
-
-        return seatsService.getSeats(cinemaId, showId);
+        Optional<Cinema> cinemaById = cinemaService.findCinemaById(cinemaId);
+        if(cinemaById.isEmpty()) throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "Cinema with given ID does not exist");
+        int seatCount = cinemaById.get().getSeatCount();
+        return seatsService.getFreeSeats(seatCount, showId);
     }
+
 }

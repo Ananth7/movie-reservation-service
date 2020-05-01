@@ -26,19 +26,17 @@ public class SeatSQLDao implements SeatsDao {
         }
     }
 
-
-
 //        `id` bigint(19) NOT NULL AUTO_INCREMENT,
 //    `uuid` varchar(40) NOT NULL,
-//    `show_id` bigint(19) NOT NULL,
+//    `show_id` varchar(40) NOT NULL,
 //    `seat_number` varchar(40) NOT NULL,
 //    `status` varchar(250) NULL,
 
     @Override
-    public List<Seat> getSeats() {
-        String getCitiesQuery = "select * from booked_seats;";
+    public List<Seat> getAllSeats() {
+        String getSeatsQuery = "select * from booked_seats;";
         try {
-            ResultSet resultSet = QueryExecutor.execReads(getCitiesQuery);
+            ResultSet resultSet = QueryExecutor.execReads(getSeatsQuery);
             List<Seat> res = new ArrayList<>();
 
             while (resultSet.next()) {
@@ -47,7 +45,7 @@ public class SeatSQLDao implements SeatsDao {
                         .bookingId(resultSet.getString("uuid"))
                         .showId(resultSet.getString("show_id"))
                         .status(resultSet.getString("status"))
-                        .seatNumber(resultSet.getString("seat_number")).build();
+                        .seatNumber(resultSet.getInt("seat_number")).build();
 
                 System.out.println(show);
                 res.add(show);
@@ -62,8 +60,30 @@ public class SeatSQLDao implements SeatsDao {
     }
 
     @Override
-    public List<Seat> getSeats(String cinemaId, String showId) {
-        return null;
+    public List<Seat> getBookedSeats(String showId) {
+        String query = "Select * from booked_seats  where show_id = '" + showId + "'";
+        try {
+            ResultSet resultSet = QueryExecutor.execReads(query);
+            List<Seat> res = new ArrayList<>();
+
+            while (resultSet.next()) {
+                // retrieve and print the values for the current row
+                Seat show = Seat.builder()
+                        .bookingId(resultSet.getString("uuid"))
+                        .showId(resultSet.getString("show_id"))
+                        .status(resultSet.getString("status"))
+                        .seatNumber(resultSet.getInt("seat_number")).build();
+
+                System.out.println(show);
+                res.add(show);
+            }
+            resultSet.getStatement().getConnection().close();
+            return res;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

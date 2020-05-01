@@ -14,12 +14,12 @@ public class Seat {
     private String bookingId;
     private String showId;
     private String status;
-    private String seatNumber;
+    private int seatNumber;
 
     public Seat(
             @JsonProperty("showID") String showId,
             @JsonProperty("status") String status,
-            @JsonProperty("seatNumber") String seatNumber) {
+            @JsonProperty("seatNumber") int seatNumber) {
         this.bookingId = UUID.randomUUID().toString();
         this.showId = showId;
         this.status = status;

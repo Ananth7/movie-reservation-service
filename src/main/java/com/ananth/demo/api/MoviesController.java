@@ -1,6 +1,7 @@
 package com.ananth.demo.api;
 
 import com.ananth.demo.model.Movie;
+import com.ananth.demo.response.MoviesByCity;
 import com.ananth.demo.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +25,9 @@ public class MoviesController {
         this.movieService = movieService;
     }
 
-    @GetMapping(path="/{city}")
-    public List<Movie> getMoviesByCity(@PathVariable("city") String name) {
-
+    @GetMapping(path="/city/{city}")
+    @ResponseBody
+    public List<MoviesByCity> getMoviesByCity(@PathVariable("city") String name) {
         return movieService.getMoviesByCity(name);
     }
 

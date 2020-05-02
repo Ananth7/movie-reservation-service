@@ -62,13 +62,15 @@ public class MoviesSQLDao implements MoviesDao {
     }
 
     @Override
-    public List<MoviesByCity> getMoviesByCity(String id) {
+    public List<MoviesByCity> getMoviesByCity(String city) {
         String getCitiesQuery =
                 "select s.movie_id , s.uuid as show_id, s.show_date as show_date, s.start_time as start_time ," +
                 " s.end_time as end_time from shows as s" +
-                " where s.cinema_id in (select uuid from cinemas as c " +
-                "where c.city_id = '"+ id + "'" +
-                ") group by s.movie_id;" ;
+                " where s.cinema_id in (" +
+                        "select uuid from cinemas as c where c.city_id in " +
+                        "(select uuid from cities where name = '" + city + "') " +
+                        ") group by s.movie_id, show_id, show_date;" ;
+
         System.out.println(getCitiesQuery);
         try {
             ResultSet resultSet = QueryExecutor.execReads(getCitiesQuery);

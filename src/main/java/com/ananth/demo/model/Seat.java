@@ -11,18 +11,18 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class Seat {
-    private String bookingId;
+    private String uuid;
     private String showId;
-    private String status;
+    private String bookingId;
     private int seatNumber;
 
     public Seat(
             @JsonProperty("showID") String showId,
-            @JsonProperty("status") String status,
+            @JsonProperty("status") String bookingId,
             @JsonProperty("seatNumber") int seatNumber) {
-        this.bookingId = UUID.randomUUID().toString();
+        this.uuid = UUID.randomUUID().toString();
         this.showId = showId;
-        this.status = status;
+        this.bookingId = bookingId;
         this.seatNumber = seatNumber;
     }
 }

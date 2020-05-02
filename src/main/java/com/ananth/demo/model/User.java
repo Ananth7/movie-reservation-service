@@ -30,7 +30,7 @@ public class User {
     }
 
     public User(@NotBlank @JsonProperty("name") String name,
-                @NotBlank @JsonProperty("emaildId") String emailId,
+                @NotBlank @JsonProperty("emailId") String emailId,
                 @NotBlank @JsonProperty("phoneNumber") String phoneNumber,
                 @NotBlank @JsonProperty("isAdmin") int isAdmin) {
         this.userID = UUID.randomUUID().toString();

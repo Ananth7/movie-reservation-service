@@ -7,14 +7,16 @@ import com.ananth.demo.response.ShowsByCityMovieResponse;
 import com.ananth.demo.service.SeatsService;
 import com.ananth.demo.service.ShowsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -50,19 +52,22 @@ public class ShowsController {
         return shows.stream().collect(Collectors.groupingBy(ShowsByCityMovieResponse::getCinemaName));
     }
 
-
-    @GetMapping("/api/v1/shows/{show_id}/getfreeseats")
-    @ResponseBody
-    public Optional<List<Seat>> getFreeSeats(@PathVariable("show_id") String show_id) {
-        return showsService.getFreeSeats(show_id);
-    }
-
-    @PutMapping("/api/v1/shows/{show_id}/seat/reserve")
+    @PostMapping("/api/v1/shows/{show_id}/seat/reserve")
     @ResponseBody
     public List<Seat> reserve(
             @PathVariable("show_id") String showId,
             @RequestBody SeatsRequestBody seatsRequestBody) {
-            return seatsService.reserve(showId, seatsRequestBody.getSeatIds());
+        try {
+            return seatsService.reserve(showId, seatsRequestBody.getSeatIds(), seatsRequestBody.getUser_id());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "~~~Sorry~~~ Not all seats are available for booking. Please try again.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong. Please try again.");
+        }
     }
 
     @GetMapping("/api/v1/shows/{show_id}")

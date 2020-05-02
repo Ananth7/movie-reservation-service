@@ -2,7 +2,6 @@ package com.ananth.demo.api;
 
 import com.ananth.demo.model.Cinema;
 import com.ananth.demo.model.CinemaOwnership;
-import com.ananth.demo.model.Seat;
 import com.ananth.demo.model.Show;
 import com.ananth.demo.model.User;
 import com.ananth.demo.request.CinemaOwnershipRequestBody;
@@ -108,7 +107,7 @@ public class CinemaController {
         return showsService.addShow(new Show(cinemaId, show));
     }
 
-    @GetMapping("api/v1/cinema/{cinema_id}/shows/{show_id}/availableseats")
+    @GetMapping("api/v1/cinema/{cinema_id}/shows/{show_id}/freeseats")
     @ResponseBody
     public List<Integer> getSeats(
             @PathVariable("cinema_id") String cinemaId,

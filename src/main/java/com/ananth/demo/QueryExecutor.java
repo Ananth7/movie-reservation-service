@@ -1,5 +1,7 @@
 package com.ananth.demo;
 import java.sql.*;
+import java.util.List;
+
 public class QueryExecutor {
 
     private static Connection connection;
@@ -39,6 +41,7 @@ public class QueryExecutor {
 //        stmt.close();
 //        return count;
 //    }
+
 
 
     private static Statement createStatement() throws Exception {

@@ -27,7 +27,7 @@ public class CityController {
     @ResponseBody
     public List<City> getCities() {
         List<City> res = cityService.getCities();
-        res.forEach(r -> System.out.println(r));
+        res.forEach(System.out::println);
         return res;
     }
 

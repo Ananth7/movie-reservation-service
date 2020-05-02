@@ -11,26 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
 
-/**
- * Adduser:
- * {
- *     "name" : "",
- * }
- *
- * AddPartners:
- * {
- *     "userId"
- *     "theaterID"
- *     "RoleType"
- * }
- */
-
-@RequestMapping("api/v1/user")
 @RestController
 @AllArgsConstructor
 public class UserController {
@@ -38,10 +24,10 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
-
-    @PostMapping
-    public void addUser(@Valid @NonNull @RequestBody User user) {
-        userService.addUser(user);
+    @PostMapping("api/v1/user")
+    @ResponseBody
+    public User addUser(@Valid @NonNull @RequestBody User user) {
+        return userService.addUser(user);
     }
 
     @GetMapping("api/v1/user/{userId}")
@@ -54,7 +40,7 @@ public class UserController {
         userService.deleteUserById(userId);
     }
 
-    @GetMapping
+    @GetMapping("api/v1/user")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }

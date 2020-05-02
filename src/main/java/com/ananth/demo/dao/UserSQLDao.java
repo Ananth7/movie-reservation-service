@@ -15,7 +15,7 @@ public class UserSQLDao implements UserDao {
     @Override
     public User insertUser(User user) {
         String addShowQuery = "insert into users (uuid, name, email, phone_number, is_admin "+
-                ") values (' " + user.getUserID() + "', '" + user.getName() + "', '"
+                ") values ('" + user.getUserID() + "', '" + user.getName() + "', '"
                 + user.getEmailId() + "', '" + user.getPhoneNumber() + "','" + user.getIsAdmin() +  "');";
         System.out.println(addShowQuery);
         try {
@@ -83,9 +83,10 @@ public class UserSQLDao implements UserDao {
 
     @Override
     public User getUserById(String userId) {
-        String getCitiesQuery = "select * from users where user where uuid = " + userId + ";";
+        String getUsersQuery = "select * from users where uuid = '" + userId + "';";
+        System.out.println(getUsersQuery);
         try {
-            ResultSet resultSet = QueryExecutor.execReads(getCitiesQuery);
+            ResultSet resultSet = QueryExecutor.execReads(getUsersQuery);
 
             User user = null;
             while (resultSet.next()) {

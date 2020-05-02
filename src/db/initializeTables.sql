@@ -65,13 +65,20 @@ CREATE TABLE shows (
  -- CONSTRAINT `fk_shows_movie_id` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`id`) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+create table booking (
+    `id` bigint(19) NOT NULL AUTO_INCREMENT,
+    `booking_id` varchar(40) NOT NULL,
+    `user_id` varchar(40) NOT NULL,
+    `status` varchar(40) NOT NULL,
+     PRIMARY KEY (`id`)
+);
 
 CREATE TABLE booked_seats (
     `id` bigint(19) NOT NULL AUTO_INCREMENT,
     `uuid` varchar(40) NOT NULL,
     `show_id` varchar(40) NOT NULL,
     `seat_number` varchar(40) NOT NULL,
-    `status` varchar(250) NULL,
+    `booking_id` varchar(250) NULL,
  PRIMARY KEY (`id`)
  -- CONSTRAINT `fk_booked_seats_show_id` FOREIGN KEY (`show_id`) REFERENCES `shows` (`id`) ON DELETE CASCADE
 );

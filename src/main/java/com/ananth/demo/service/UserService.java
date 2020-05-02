@@ -23,8 +23,7 @@ public class UserService {
     }
 
     public User getUserById(String id) {
-//        return userDao.getUserById();
-        return null;
+        return userDao.getUserById(id);
     }
 
     public void deleteUserById(String id) {

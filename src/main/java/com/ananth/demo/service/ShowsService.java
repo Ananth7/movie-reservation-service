@@ -37,16 +37,4 @@ public class ShowsService {
         return showsDao.getShowById(showId);
     }
 
-    public Optional<List<Seat>> getFreeSeats(String showId) {
-        Optional<Show> showById = showsDao.getShowById(showId);
-        if (showById.isEmpty()) return Optional.empty();
-        String cinemaId = showById.get().getCinemaId();
-        Optional<Cinema> cinemaById = cinemaDao.findCinemaById(cinemaId);
-        if (cinemaById.isEmpty()) return Optional.empty();
-        int availableSeats = cinemaById.get().getSeatCount();
-
-//        seatsDao.getBookedSeats();
-        return Optional.empty();
-    }
-
 }

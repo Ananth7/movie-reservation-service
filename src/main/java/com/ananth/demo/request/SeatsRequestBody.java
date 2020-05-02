@@ -8,10 +8,13 @@ import java.util.List;
 
 @Getter
 public class SeatsRequestBody {
-    private List<String> seatIds;
+    private List<Integer> seatIds;
+    private String user_id;
 
     public SeatsRequestBody(
-            @JsonProperty("seat_id") List<String> seatIds) {
+            @JsonProperty("user_id") String userId,
+            @JsonProperty("seat_ids") List<Integer> seatIds) {
         this.seatIds = new ArrayList<>(seatIds);
+        this.user_id = userId;
     }
 }

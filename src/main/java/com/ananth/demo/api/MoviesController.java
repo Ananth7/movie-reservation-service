@@ -9,15 +9,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("api/v1/movie")
 @RestController
 public class MoviesController {
 
+    @Autowired
     private MovieService movieService;
 
     @Autowired
@@ -25,13 +26,14 @@ public class MoviesController {
         this.movieService = movieService;
     }
 
-    @GetMapping(path="/city/{city}")
+    @GetMapping(path="api/v1/movie")
     @ResponseBody
-    public List<MoviesByCity> getMoviesByCity(@PathVariable("city") String name) {
+    public List<MoviesByCity> getMoviesByCity(
+            @RequestParam("city") String name) {
         return movieService.getMoviesByCity(name);
     }
 
-    @GetMapping
+    @GetMapping("api/v1/movies")
     @ResponseBody
     public List<Movie> getMovies() {
         return movieService.getMovies();
@@ -43,7 +45,7 @@ public class MoviesController {
         return movieService.getMovieById(movieId);
     }
 
-    @PostMapping
+    @PostMapping("api/v1/movie")
     @ResponseBody
     public Movie addMovie(@RequestBody Movie movie) {
         return movieService.addMovie(movie);

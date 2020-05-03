@@ -37,4 +37,5 @@ public class CityController {
         System.out.println("Controller = " + city.getCityId() + " " + city.getName());
         return cityService.addCity(city);
     }
+
 }

@@ -26,26 +26,21 @@ public class MoviesController {
         this.movieService = movieService;
     }
 
-    @GetMapping(path="api/v1/movie")
+    @GetMapping(path="api/v1/movie/")
     @ResponseBody
     public List<MoviesByCity> getMoviesByCity(
             @RequestParam("city") String name) {
         return movieService.getMoviesByCity(name);
     }
 
-    @GetMapping("api/v1/movies")
+    @GetMapping("api/v1/movie/get_all_movies")
     @ResponseBody
     public List<Movie> getMovies() {
         return movieService.getMovies();
     }
 
-    @GetMapping("/api/v1/movie/{movie_id}")
-    @ResponseBody
-    public Movie getMovieById(@PathVariable("movie_id") String movieId) {
-        return movieService.getMovieById(movieId);
-    }
 
-    @PostMapping("api/v1/movie")
+    @PostMapping("api/v1/movie/add_movie")
     @ResponseBody
     public Movie addMovie(@RequestBody Movie movie) {
         return movieService.addMovie(movie);

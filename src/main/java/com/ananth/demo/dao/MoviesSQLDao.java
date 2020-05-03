@@ -15,7 +15,7 @@ public class MoviesSQLDao implements MoviesDao {
     @Override
     public Movie addMovie(Movie movie) {
         String addCityQuery = "insert into movies (uuid, name, duration, genre, rating, poster_url, trailer_url," +
-                "plot) values (' " + movie.getMovieId() + "', '" + movie.getName() + "', '"
+                "plot) values ('" + movie.getMovieId() + "', '" + movie.getName() + "', '"
                 + movie.getDuration() + "', '" + movie.getGenre() + "', '" + movie.getRating() + "', '"
                 + movie.getPosterURL() + "', '"+ movie.getTrailerURL() + "', '" + movie.getPlot() +  "');";
         System.out.println(addCityQuery);
@@ -108,8 +108,4 @@ public class MoviesSQLDao implements MoviesDao {
         }
     }
 
-    @Override
-    public Movie getMovieById(String movieId) {
-        return null;
-    }
 }

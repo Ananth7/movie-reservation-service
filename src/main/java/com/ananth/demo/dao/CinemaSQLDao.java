@@ -15,7 +15,7 @@ import java.util.UUID;
 public class CinemaSQLDao implements CinemaDao {
     @Override
     public Cinema addCinema(Cinema cinema) {
-        String addCinemaQuery = "insert into cinemas (city_id, name, uuid, seats) values (' "
+        String addCinemaQuery = "insert into cinemas (city_id, name, uuid, seats) values ('"
                 + cinema.getCityid() + "', '"
                 + cinema.getName() + "', '"
                 + cinema.getCinemaId() + "', '"
@@ -76,11 +76,6 @@ public class CinemaSQLDao implements CinemaDao {
             e.printStackTrace();
             return null;
         }
-    }
-
-    @Override
-    public List<User> getAllOwners() {
-        return null;
     }
 
     @Override

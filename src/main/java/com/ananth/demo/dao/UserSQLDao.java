@@ -1,13 +1,14 @@
 package com.ananth.demo.dao;
 
 import com.ananth.demo.QueryExecutor;
-import com.ananth.demo.model.Seat;
 import com.ananth.demo.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserSQLDao implements UserDao {
@@ -82,10 +83,9 @@ public class UserSQLDao implements UserDao {
     }
 
     @Override
-    public User getUserById(String userId) {
+    public Optional<User> getUserById(String userId) throws SQLException {
         String getUsersQuery = "select * from users where uuid = '" + userId + "';";
         System.out.println(getUsersQuery);
-        try {
             ResultSet resultSet = QueryExecutor.execReads(getUsersQuery);
 
             User user = null;
@@ -101,11 +101,7 @@ public class UserSQLDao implements UserDao {
                 System.out.println(user);
             }
             resultSet.getStatement().getConnection().close();
-            return user;
+            return Optional.ofNullable(user);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }

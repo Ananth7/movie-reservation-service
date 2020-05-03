@@ -2,7 +2,9 @@ package com.ananth.demo.dao;
 
 import com.ananth.demo.model.User;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserDao {
 
@@ -10,7 +12,7 @@ public interface UserDao {
 
     List<User> getAllUsers();
 
-    User getUserById(String userId);
+    Optional<User> getUserById(String userId) throws SQLException;
 
     User getUserByEmail(String emailId);
 }

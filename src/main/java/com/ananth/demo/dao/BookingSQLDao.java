@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 public class BookingSQLDao implements BookingDao {
     @Override
     public Booking createBooking(Booking booking) {
-        String addBookingQuery = "insert into booking (booking_id, user_id, status) values (' "
+        String addBookingQuery = "insert into booking (booking_id, user_id, status) values ('"
                 + booking.getBooking_id() + "', '"
                 + booking.getUser_id() + "', '"
                 + booking.getStatus() + "');";

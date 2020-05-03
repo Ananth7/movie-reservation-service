@@ -5,7 +5,9 @@ import com.ananth.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -22,7 +24,7 @@ public class UserService {
         return userDao.insertUser(user);
     }
 
-    public User getUserById(String id) {
+    public Optional<User> getUserById(String id) throws SQLException {
         return userDao.getUserById(id);
     }
 

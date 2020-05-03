@@ -17,11 +17,12 @@ public class CinemaOwnershipService {
         return cinemaOwnershipDao.getCinemaOwnerships();
     }
 
-    public CinemaOwnership addCinemaOwnership(CinemaOwnership cinemaOwnership) {
-        return cinemaOwnershipDao.addCinemaOwnershipDetail(cinemaOwnership);
+    public boolean isUserOwnerOfCinema(String userId, String cinemaId) {
+        List<CinemaOwnership> ownersOfCinema = cinemaOwnershipDao.getOwnersOfCinema(cinemaId);
+        return ownersOfCinema.stream().filter(p -> p.getOwner_id().equals(userId)).count() == 1;
     }
 
-    public CinemaOwnership removeCinemaOwnership(CinemaOwnership cinemaOwnership) {
+    public CinemaOwnership addCinemaOwnership(CinemaOwnership cinemaOwnership) {
         return cinemaOwnershipDao.addCinemaOwnershipDetail(cinemaOwnership);
     }
 

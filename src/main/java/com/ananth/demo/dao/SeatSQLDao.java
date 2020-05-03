@@ -20,7 +20,7 @@ public class SeatSQLDao implements SeatsDao {
     @Override
     public Seat addSeat(Seat seat)  {
         String addShowQuery = "insert into booked_seats (uuid, show_id, seat_number, booking_id" +
-                ") values (' " + seat.getUuid() + "', '" + seat.getShowId() + "', '"
+                ") values ('" + seat.getUuid() + "', '" + seat.getShowId() + "', '"
                 + seat.getSeatNumber() + "', '" + seat.getBookingId() + "');";
         System.out.println(addShowQuery);
         try {
@@ -108,7 +108,7 @@ public class SeatSQLDao implements SeatsDao {
         for (Integer seat : seats) {
             Seat seatRecord = new Seat(showId, bookingId, seat);
             String addShowQuery = "insert into booked_seats (uuid, show_id, seat_number, booking_id" +
-                    ") values (' " + UUID.randomUUID().toString()
+                    ") values ('" + UUID.randomUUID().toString()
                     + "', '" + showId + "', '"
                     + seat + "', '" + bookingId + "');";
             System.out.println(addShowQuery);
@@ -116,8 +116,6 @@ public class SeatSQLDao implements SeatsDao {
             statement.executeUpdate(addShowQuery);
 
             // create booking if all seats have been reserved.
-
-
 
             reservedSeats.add(seatRecord);
         }

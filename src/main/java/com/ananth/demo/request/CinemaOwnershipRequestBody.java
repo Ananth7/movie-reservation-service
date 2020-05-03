@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class CinemaOwnershipRequestBody {
 
-    public CinemaOwnershipRequestBody(@JsonProperty("owner_id") String ownnerId)
+    public CinemaOwnershipRequestBody(@JsonProperty("user_id") String ownnerId)
     {
         this.ownerId = ownnerId;
     }

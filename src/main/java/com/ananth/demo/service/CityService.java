@@ -19,10 +19,6 @@ public class CityService {
         return cityDao.addCity(city);
     }
 
-//    public City getCityByName(String city) {
-//        return cityDao.getCityByName(city).get();
-//    }
-
     public List<City> getCities() {
         return cityDao.getCities();
     }

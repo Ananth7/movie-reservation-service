@@ -9,5 +9,6 @@ public interface CinemaOwnershipDao {
 
     List<CinemaOwnership> getCinemaOwnerships();
     CinemaOwnership addCinemaOwnershipDetail(CinemaOwnership cinemaOwnership);
+    List<CinemaOwnership> getOwnersOfCinema(String cinemaId);
 
 }

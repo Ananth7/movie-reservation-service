@@ -26,39 +26,26 @@ public class QueryExecutor {
         }
     }
 
-
-//    public static ResultSet executeReads(String sqlQuery) throws Exception {
-//        Statement statement = connection.createStatement();
-//        ResultSet res = statement.executeQuery(sqlQuery);
-//        statement.close();
-//        return res;
-//    }
-//
-//
-//    public static int executeWrites(String sqlQuery) throws Exception {
-//        Statement stmt = connection.createStatement();
-//        int count =  stmt.executeUpdate(sqlQuery);
-//        stmt.close();
-//        return count;
-//    }
-
-
-
-    private static Statement createStatement() throws Exception {
-        Class.forName("com.mysql.jdbc.Driver");
+    private static Statement createStatement() throws SQLException {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("JDBC connection failed because of missing driver.!");
+        }
         Connection con=DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/demo","root", "");
         Statement stmt = con.createStatement();
         return stmt;
     }
 
-    public static ResultSet execReads(String sqlQuery) throws Exception {
+    public static ResultSet execReads(String sqlQuery) throws SQLException {
         Statement stmt = createStatement();
         ResultSet rs = stmt.executeQuery(sqlQuery);
         return rs;
     }
 
-    public static int execWrites(String sqlQuery) throws Exception {
+    public static int execWrites(String sqlQuery) throws SQLException {
         Statement stmt = createStatement();
         int count =  stmt.executeUpdate(sqlQuery);
         stmt.getConnection().close();

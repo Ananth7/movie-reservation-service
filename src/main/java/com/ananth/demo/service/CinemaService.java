@@ -33,6 +33,9 @@ public class CinemaService {
         return cinemaDao.findCinemaById(cinemaId);
     }
 
+    public List<Cinema> getCinemasInCity(String name) {
+        return cinemaDao.getCinemasInCity(name);
+    }
 
     public List<User> getAllOwners() {return cinemaDao.getAllOwners();}
 

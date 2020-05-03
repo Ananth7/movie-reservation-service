@@ -63,16 +63,28 @@ public class MoviesSQLDao implements MoviesDao {
 
     @Override
     public List<MoviesByCity> getMoviesByCity(String city) {
-        String getCitiesQuery =
-                "select s.movie_id , s.uuid as show_id, s.show_date as show_date, s.start_time as start_time ," +
-                " s.end_time as end_time from shows as s" +
-                " where s.cinema_id in (" +
-                        "select uuid from cinemas as c where c.city_id in " +
-                        "(select uuid from cities where name = '" + city + "') " +
-                        ") group by s.movie_id, show_id, show_date;" ;
+        String createViews =
+                "create or replace view cinemasincity as  " +
+                        "select * from cinemas as c where c.city_id in (select uuid from cities where name = '" + city +"'); " +
+                        "-- select * from cinemasincity; " +
+                        "create or replace view allshows as  " +
+                        "select * from shows; " +
+                        "-- select * from allshows; " +
+                        "create or replace view showsincity as " +
+                        "select a.uuid, a.show_date, a.start_time, a.movie_id from allshows as a inner join cinemasincity on a.cinema_id = cinemasincity.uuid; " +
+                        "-- select * from showsincity; " +
+                        "create or replace view allmovies as  " +
+                        "select * from movies; " +
+                        "-- select * from allmovies; " ;
+                        String getCitiesQuery =
+                        "select m.name, m.uuid as movie_id from allmovies as m " +
+                        "inner join showsincity " +
+                        "on showsincity.movie_id = m.uuid " +
+                        "group by m.name; ";
 
         System.out.println(getCitiesQuery);
         try {
+            QueryExecutor.execWrites(createViews);
             ResultSet resultSet = QueryExecutor.execReads(getCitiesQuery);
             List<MoviesByCity> res = new ArrayList<>();
 
@@ -81,10 +93,7 @@ public class MoviesSQLDao implements MoviesDao {
                 MoviesByCity moviesByCity =
                         MoviesByCity.builder()
                         .movie_id(resultSet.getString("movie_id"))
-                        .show_id(resultSet.getString("show_id"))
-                        .show_date(resultSet.getDate("show_date"))
-                        .start_time(resultSet.getDate("start_time"))
-                        .end_time(resultSet.getDate("end_time"))
+                        .movie_name(resultSet.getString("name"))
                         .build();
 
                 System.out.println(moviesByCity);

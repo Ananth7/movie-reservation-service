@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -107,11 +108,11 @@ public class CinemaController {
         return showsService.addShow(new Show(cinemaId, show));
     }
 
-    @GetMapping("api/v1/cinema/{cinema_id}/shows/{show_id}/freeseats")
+    @GetMapping("api/v1/freeseats")
     @ResponseBody
     public List<Integer> getSeats(
-            @PathVariable("cinema_id") String cinemaId,
-            @PathVariable("show_id") String showId) {
+            @RequestParam("cinema_id") String cinemaId,
+            @RequestParam("show_id") String showId) {
         Optional<Cinema> cinemaById = cinemaService.findCinemaById(cinemaId);
         if(cinemaById.isEmpty()) throw new ResponseStatusException(
                 HttpStatus.BAD_REQUEST, "Cinema with given ID does not exist");

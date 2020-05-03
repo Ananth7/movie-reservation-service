@@ -82,4 +82,30 @@ public class CinemaSQLDao implements CinemaDao {
     public List<User> getAllOwners() {
         return null;
     }
+
+    @Override
+    public List<Cinema> getCinemasInCity(String name) {
+        String getCitiesQuery = "select * from cinemas as c where" +
+                " c.city_id in (select uuid from cities where name = '" + name + "')";
+        try {
+            ResultSet resultSet = QueryExecutor.execReads(getCitiesQuery);
+            List<Cinema> res = new ArrayList<>();
+
+            while (resultSet.next()) {
+                // retrieve and print the values for the current row
+                Cinema cinema = new Cinema(resultSet.getString("uuid"),
+                        resultSet.getString("name"), resultSet.getString("city_id"),
+                        resultSet.getInt("seats"));
+                System.out.println(cinema.getName());
+                res.add(cinema);
+            }
+
+            resultSet.getStatement().getConnection().close();
+            return res;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

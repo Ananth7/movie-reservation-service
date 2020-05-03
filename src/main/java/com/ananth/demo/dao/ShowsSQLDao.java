@@ -86,7 +86,6 @@ public class ShowsSQLDao implements ShowsDao {
             while (resultSet.next()) {
                 // retrieve and print the values for the current row
                 ShowsByCityMovieResponse show = ShowsByCityMovieResponse.builder()
-                        .cinemaId(resultSet.getString("cinema_id"))
                         .cinemaName(resultSet.getString("cinema_name"))
                         .show_id(resultSet.getString("show_id"))
                         .show_date(resultSet.getDate("show_date"))

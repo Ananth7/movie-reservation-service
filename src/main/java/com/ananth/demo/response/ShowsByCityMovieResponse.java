@@ -9,7 +9,6 @@ import java.util.Date;
 @Builder
 @Getter
 public class ShowsByCityMovieResponse {
-    private String cinemaId;
     private String cinemaName;
     private String show_id;
 
@@ -25,7 +24,6 @@ public class ShowsByCityMovieResponse {
     @Override
     public String toString() {
         return "ShowsByCityMovieResponse{" +
-                "cinemaId='" + cinemaId + '\'' +
                 ", cinemaName='" + cinemaName + '\'' +
                 ", show_id='" + show_id + '\'' +
                 ", show_date=" + show_date +

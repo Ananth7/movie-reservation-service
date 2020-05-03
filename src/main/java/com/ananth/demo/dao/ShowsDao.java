@@ -11,7 +11,7 @@ public interface ShowsDao {
 
     List<Show> getShows();
     Show addShow(Show show);
-    List<ShowsByCityMovieResponse> getShows(String cinemaId, String showId);
+    List<ShowsByCityMovieResponse> getShows(String cinemaId, String movieId);
 
     Optional<Show> getShowById(String showId);
 

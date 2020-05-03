@@ -16,4 +16,6 @@ public interface CinemaDao {
 
     public List<User> getAllOwners();
 
+    public List<Cinema> getCinemasInCity(String name);
+
 }

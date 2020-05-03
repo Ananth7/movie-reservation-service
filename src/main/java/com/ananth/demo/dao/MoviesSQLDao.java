@@ -63,28 +63,23 @@ public class MoviesSQLDao implements MoviesDao {
 
     @Override
     public List<MoviesByCity> getMoviesByCity(String city) {
-        String createViews =
-                "create or replace view cinemasincity as  " +
-                        "select * from cinemas as c where c.city_id in (select uuid from cities where name = '" + city +"'); " +
-                        "-- select * from cinemasincity; " +
-                        "create or replace view allshows as  " +
-                        "select * from shows; " +
-                        "-- select * from allshows; " +
-                        "create or replace view showsincity as " +
-                        "select a.uuid, a.show_date, a.start_time, a.movie_id from allshows as a inner join cinemasincity on a.cinema_id = cinemasincity.uuid; " +
-                        "-- select * from showsincity; " +
-                        "create or replace view allmovies as  " +
-                        "select * from movies; " +
-                        "-- select * from allmovies; " ;
-                        String getCitiesQuery =
+        String createView1 = "create or replace view cinemasincity as select * from cinemas as c where c.city_id in (select uuid from cities where name = '" + city +"'); ";
+        String createView2 ="create or replace view allshows as select * from shows; ";
+        String createView3 = "create or replace view showsincity as select a.uuid, a.show_date, a.start_time, a.movie_id from allshows as a inner join cinemasincity on a.cinema_id = cinemasincity.uuid; ";
+        String createView4  ="create or replace view allmovies as select * from movies; ";
+
+        String getCitiesQuery =
                         "select m.name, m.uuid as movie_id from allmovies as m " +
                         "inner join showsincity " +
                         "on showsincity.movie_id = m.uuid " +
                         "group by m.name; ";
 
-        System.out.println(getCitiesQuery);
         try {
-            QueryExecutor.execWrites(createViews);
+            System.out.println(createView1);QueryExecutor.execWrites(createView1);
+            System.out.println(createView2);QueryExecutor.execWrites(createView2);
+            System.out.println(createView3);QueryExecutor.execWrites(createView3);
+            System.out.println(createView4);QueryExecutor.execWrites(createView4);
+            System.out.println(getCitiesQuery);
             ResultSet resultSet = QueryExecutor.execReads(getCitiesQuery);
             List<MoviesByCity> res = new ArrayList<>();
 

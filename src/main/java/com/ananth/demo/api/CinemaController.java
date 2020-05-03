@@ -104,16 +104,5 @@ public class CinemaController {
         return showsService.addShow(new Show(cinemaId, show));
     }
 
-    @GetMapping("api/v1/cinema/get_free_seats")
-    @ResponseBody
-    public List<Integer> getSeats(
-            @RequestParam("cinema_id") String cinemaId,
-            @RequestParam("show_id") String showId) {
-        Optional<Cinema> cinemaById = cinemaService.findCinemaById(cinemaId);
-        if(cinemaById.isEmpty()) throw new ResponseStatusException(
-                HttpStatus.BAD_REQUEST, "Cinema with given ID does not exist");
-        int seatCount = cinemaById.get().getSeatCount();
-        return seatsService.getFreeSeats(seatCount, showId);
-    }
 
 }

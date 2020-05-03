@@ -9,4 +9,5 @@ public interface CityDao {
     List<City> getCities();
     City addCity(City city);
     City getCityById(String uuid);
+    City getCityByName(String name);
 }

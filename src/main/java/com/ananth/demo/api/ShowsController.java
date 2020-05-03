@@ -1,9 +1,11 @@
 package com.ananth.demo.api;
 
+import com.ananth.demo.model.Cinema;
 import com.ananth.demo.model.Seat;
 import com.ananth.demo.model.Show;
 import com.ananth.demo.request.SeatsRequestBody;
 import com.ananth.demo.response.ShowsByCityMovieResponse;
+import com.ananth.demo.service.CinemaService;
 import com.ananth.demo.service.SeatsService;
 import com.ananth.demo.service.ShowsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +34,9 @@ public class ShowsController {
     @Autowired
     private SeatsService seatsService;
 
-    @PostMapping("/api/v1/shows")
-    @ResponseBody
-    public Show addShow(@RequestBody Show show) {
-        System.out.println(show);
-        return showsService.addShow(show);
-    }
+    @Autowired
+    private CinemaService cinemaService;
+
 
     @GetMapping("/api/v1/shows")
     @ResponseBody
@@ -49,6 +48,7 @@ public class ShowsController {
     @ResponseBody
     public Map<String, List<ShowsByCityMovieResponse>> getShowsByCityAndMovie(@RequestParam("city") String city_name,
                                                                                @RequestParam("movie_id") String movie_id) {
+
         List<ShowsByCityMovieResponse> shows = showsService.getShows(city_name, movie_id);
         Map<String, List<ShowsByCityMovieResponse>> result
                 = shows.stream().collect(Collectors.groupingBy(ShowsByCityMovieResponse::getCinemaName));
@@ -84,6 +84,21 @@ public class ShowsController {
     @ResponseBody
     public List<Seat> getBookedSeatsForShow(@PathVariable("show_id") String showId) {
         return seatsService.getBookedSeats(showId);
+    }
+
+    @GetMapping("api/v1/shows/get_free_seats")
+    @ResponseBody
+    public List<Integer> getSeats(
+//            @RequestParam("cinema_id") String cinemaId,
+            @RequestParam("show_id") String showId) {
+        Optional<Show> showById = showsService.getShowById(showId);
+        if (showById.isEmpty()) throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "Show with given ID does not exist");
+        Optional<Cinema> cinemaById = cinemaService.findCinemaById(showById.get().getCinemaId());
+        if (cinemaById.isEmpty()) throw new ResponseStatusException(
+                HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong!");
+        int seatCount = cinemaById.get().getSeatCount();
+        return seatsService.getFreeSeats(seatCount, showId);
     }
 
 }

@@ -4,9 +4,7 @@ import com.ananth.demo.dao.CinemaDao;
 import com.ananth.demo.dao.CityDao;
 import com.ananth.demo.dao.SeatsDao;
 import com.ananth.demo.dao.ShowsDao;
-import com.ananth.demo.model.Cinema;
 import com.ananth.demo.model.City;
-import com.ananth.demo.model.Seat;
 import com.ananth.demo.model.Show;
 import com.ananth.demo.response.ShowsByCityMovieResponse;
 import lombok.AllArgsConstructor;
@@ -32,11 +30,10 @@ public class ShowsService {
         return showsDao.getShows();
     }
 
-    public List<ShowsByCityMovieResponse> getShows(String city_id, String movieId) {
-        cityDao.getCityById(city_id);
-        return showsDao.getShows(city_id, movieId);
+    public List<ShowsByCityMovieResponse> getShows(String cityName, String movieId) {
+        City cityByName = cityDao.getCityByName(cityName);
+        return showsDao.getShows(cityByName.getCityId(), movieId);
     }
-
 
     public Optional<Show> getShowById(String showId) {
         return showsDao.getShowById(showId);

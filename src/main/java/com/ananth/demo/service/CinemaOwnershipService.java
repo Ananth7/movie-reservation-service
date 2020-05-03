@@ -19,7 +19,7 @@ public class CinemaOwnershipService {
 
     public boolean isUserOwnerOfCinema(String userId, String cinemaId) {
         List<CinemaOwnership> ownersOfCinema = cinemaOwnershipDao.getOwnersOfCinema(cinemaId);
-        return ownersOfCinema.stream().filter(p -> p.getOwner_id().equals(userId)).count() == 1;
+        return ownersOfCinema.stream().filter(p -> p.getOwner_id().equals(userId)).count() >= 1;
     }
 
     public CinemaOwnership addCinemaOwnership(CinemaOwnership cinemaOwnership) {

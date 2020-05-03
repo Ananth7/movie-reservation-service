@@ -1,6 +1,6 @@
-CREATE DATABASE demo1;
+CREATE DATABASE demo;
 
-USE demo1;
+USE demo;
 
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '' WITH GRANT OPTION;
 

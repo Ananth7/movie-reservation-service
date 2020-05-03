@@ -56,7 +56,7 @@ public class ShowsSQLDao implements ShowsDao {
     public Show addShow(Show show) {
 //STR_TO_DATE('yourDateTimeValue','%d/%m/%Y %H:%i:%s')
         String addShowQuery = "insert into shows (uuid, movie_id, cinema_id, start_time, end_time, show_date" +
-                ") values ('" + show.getCinemaId() + "', '" + show.getMovieId() + "', '"
+                ") values ('" + show.getShowId() + "', '" + show.getMovieId() + "', '"
                 + show.getCinemaId() + "', STR_TO_DATE('" + show.getStartTime() + "', '%d/%m/%Y %H:%i:%s')," +
                 " STR_TO_DATE('" + show.getEndTime()  + "', '%d/%m/%Y %H:%i:%s')," +
                 " STR_TO_DATE('" + show.getShowDate() + "', '%d/%m/%Y')" + ");";

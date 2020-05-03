@@ -20,9 +20,9 @@ public class Show {
 
     public Show(String cinemaId,
                 CreateShowRequestBody showRequest) {
+        this.cinemaId = cinemaId;
         this.showId = UUID.randomUUID().toString();
         this.movieId = showRequest.getMovieId();
-        this.cinemaId = cinemaId;
         this.startTime = showRequest.getStartTime();
         this.endTime = showRequest.getEndTime();
         this.showDate = showRequest.getShowDate();

@@ -1,0 +1,14 @@
+id,"uuid","name","email","phone_number",is_admin
+1,"a037b9d8-a608-4f58-814c-8e7545af260d","Ananth","7ananth@gmail.com","8939259981",1
+2,"adefb5b6-b078-4001-9bf0-d81e741b3391","Sachin","sachin@gmail.com","8923123123",0
+3,"f3106025-eea3-4e88-b319-55fc84b38920","Sangi","sangi@gmail.com","8923123122",0
+6,"b087abc7-1e2d-4098-9ec3-2ff208a4a314","CR7","crgmail.com","8923123121",0
+7,"f5a6dc7c-4150-4e70-9ace-ca134dc25dea","Mamta","mamta.com","1923123121",0
+8,"49b6db59-60af-440d-8830-a12206e5e6d3","Cchate","cchate.com","1223123121",0
+9,"8cc8bec5-e058-4c9a-a2f7-6b8c35947b9b","Gupta","gupta.com","7223123121",0
+10,"dd80aa73-8cd9-4e80-ac6c-52afbcc19b17","Poomalai","poo.com","9223123121",1
+11,"93ce5393-6ed2-4042-bd6c-846f26cac490","Rajkumar","raj.com","6223123121",0
+14,"561baffb-8b4a-4c52-a757-f8fba115b87c","Taj Karan","taj.com","9223153121",0
+15,"01213aee-b2ac-46cf-8054-6c4cf1bb0721","Pink","pink.com","90023153121",0
+16,"3d2be092-e80b-4ae8-a243-1310fe1769ea","bish","bish.com","90823153121",0
+17,"1c87ade7-47cb-40e3-bfb8-fce6a742294e","vish","vish.com","60823153121",0

@@ -1,0 +1,10 @@
+id,"uuid","name","city_id",seats
+1,"f4f71b1f-7e7e-4377-b75b-45bd475d9799","Shanti","fb2dcb56-a766-4086-a5e0-0e447e7a53a1",50
+2,"231e8cc0-29ab-49d0-9aba-c2066a801ad1","Sathyam","fb2dcb56-a766-4086-a5e0-0e447e7a53a1",50
+3,"333e8cc0-29ab-49d0-9aba-c2066a801ad1","Inox","fb2dcb56-a766-4086-a5e0-0e447e7a53a0",100
+4,"444e8cc0-29ab-49d0-9aba-c2066a801ad1","Puma","fb2dcb56-a766-4086-a5e0-0e447e7a53a0",75
+5,"408ca99d-3714-4785-87ae-76f0ff39fcc2","Postman","5a319025-7a9a-4971-954f-4e70c6da30ba",75
+6,"011d850e-0867-4ea8-b2b9-c71ed95fef72","Sangam","5a319025-7a9a-4971-954f-4e70c6da30ba",75
+7,"395d926f-e549-40c6-a6dd-18770d10c8e6","Pune star","fb2dcb56-a766-4086-a5e0-0e447e7a53a2",75
+8,"599cab3f-0ea0-4a24-a212-f4debc86ae5d","Punai star","fb2dcb56-a766-4086-a5e0-0e447e7a53a2",75
+9,"6d3fb16a-f220-415c-a567-49f5f534812c","Namma Bengaluru","fb2dcb56-a766-4086-a5e0-0e447e7a53a0",75

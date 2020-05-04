@@ -50,7 +50,7 @@ public class SeatsService {
         for (int i = 0; i < seatCount; i ++) {
             final int seatNumber = i;
             Optional<Seat> optionalSeat = bookedSeats.stream().filter(s -> s.getSeatNumber() == seatNumber).findFirst();
-            if (optionalSeat.isEmpty())freeSeats.add(seatNumber);
+            if (!optionalSeat.isPresent())freeSeats.add(seatNumber);
         }
         return freeSeats;
     }

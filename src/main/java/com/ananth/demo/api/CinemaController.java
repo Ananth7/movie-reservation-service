@@ -49,8 +49,8 @@ public class CinemaController {
     @ResponseBody
     public Cinema createCinema(@RequestBody CreateCinemaRequest createCinemaRequest) {
         try {
-            Optional<User> userById = userService.getUserById(createCinemaRequest.getUserId());
-            if (userById.isEmpty() ||  userById.get().getIsAdmin() == 0)
+            Optional<User>  userById = userService.getUserById(createCinemaRequest.getUserId());
+            if (!userById.isPresent() ||  userById.get().getIsAdmin() == 0)
                 throw new ResponseStatusException(
                         HttpStatus.BAD_REQUEST, "~~~Sorry~~~ Invalid user");
         } catch (SQLException e) {
@@ -76,7 +76,7 @@ public class CinemaController {
             @RequestBody CinemaOwnershipRequestBody cinemaOwnershipRequestBody) {
 
         Optional<Cinema> cinemaById = cinemaService.findCinemaById(cinemaId);
-        if(cinemaById.isEmpty()) throw new ResponseStatusException(
+        if(!cinemaById.isPresent()) throw new ResponseStatusException(
                 HttpStatus.BAD_REQUEST, "Cinema with given ID does not exist");
 
         return cinemaOwnershipService.addCinemaOwnership(

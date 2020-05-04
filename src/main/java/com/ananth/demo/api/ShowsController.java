@@ -92,10 +92,10 @@ public class ShowsController {
 //            @RequestParam("cinema_id") String cinemaId,
             @RequestParam("show_id") String showId) {
         Optional<Show> showById = showsService.getShowById(showId);
-        if (showById.isEmpty()) throw new ResponseStatusException(
+        if (!showById.isPresent()) throw new ResponseStatusException(
                 HttpStatus.BAD_REQUEST, "Show with given ID does not exist");
         Optional<Cinema> cinemaById = cinemaService.findCinemaById(showById.get().getCinemaId());
-        if (cinemaById.isEmpty()) throw new ResponseStatusException(
+        if (!cinemaById.isPresent()) throw new ResponseStatusException(
                 HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong!");
         int seatCount = cinemaById.get().getSeatCount();
         return seatsService.getFreeSeats(seatCount, showId);
